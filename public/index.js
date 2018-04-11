@@ -16,7 +16,18 @@ const requestComplete = function(){
   if(this.status !== 200) return;
   const jsonString = this.responseText;
   const beers = JSON.parse(jsonString);
-  populateList(beers);
+  populateSelect(beers);
+  //populateList(beers);
+}
+
+const populateSelect = function(beers){
+  const select = document.getElementById('beer-select');
+  beers.forEach(function(beer, index){
+    let option = document.createElement('option');
+    option.innerText = beer.name;
+    option.value = index;
+    select.appendChild(option);
+  });
 }
 
 const populateList = function(beers){
