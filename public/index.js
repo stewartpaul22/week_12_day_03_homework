@@ -1,6 +1,8 @@
 const app = function(){
   const url = 'https://api.punkapi.com/v2/beers';
   makeRequest(url, requestComplete);
+
+
 }
 
 const makeRequest = function(url, callback){
@@ -18,12 +20,15 @@ const requestComplete = function(){
 }
 
 const populateList = function(beers){
-  const ul = document.getElementById('booze-list');
+  const mainDiv = document.getElementById('booze-list');
 
   beers.forEach(function(beer){
-    const li = document.createElement('li');
-    li.innerText = beer.name;
-    ul.appendChild(li);
+    const beerName = document.createElement('div');
+    beerName.innerText = beer.name;
+    const beerImage = document.createElement('img');
+    beerImage.src = beer.image_url;
+    mainDiv.appendChild(beerName);
+    beerName.appendChild(beerImage);
   });
 }
 
