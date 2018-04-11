@@ -17,7 +17,7 @@ const requestComplete = function(){
   const jsonString = this.responseText;
   const beers = JSON.parse(jsonString);
   populateSelect(beers);
-  //populateList(beers);
+  getBeer(beers);
 }
 
 const populateSelect = function(beers){
@@ -30,17 +30,24 @@ const populateSelect = function(beers){
   });
 }
 
-const populateList = function(beers){
-  const mainDiv = document.getElementById('booze-list');
-
-  beers.forEach(function(beer){
-    const beerName = document.createElement('div');
-    beerName.innerText = beer.name;
-    const beerImage = document.createElement('img');
-    beerImage.src = beer.image_url;
-    mainDiv.appendChild(beerName);
-    beerName.appendChild(beerImage);
+const getBeer = function(beers){
+  const selectedBeer = document.getElementById('beer-select');
+  selectedBeer.addEventListener('change', function(){
+    let beer = beers[this.value];
+    beerDetails(beer);
   });
+}
+
+const beerDetails = function(beer){
+  const mainDiv = document.getElementById('booze-list');
+  mainDiv.removeChild(mainDiv.childNodes[0]);
+  const beerName = document.createElement('div');
+  beerName.innerText = beer.name;
+  const beerImage = document.createElement('img');
+  beerImage.src = beer.image_url;
+  beerName.appendChild(beerImage);
+  mainDiv.appendChild(beerName);
+  return mainDiv;
 }
 
 window.addEventListener('load', app);
