@@ -1,8 +1,6 @@
 const app = function(){
   const url = 'https://api.punkapi.com/v2/beers';
   makeRequest(url, requestComplete);
-
-
 }
 
 const makeRequest = function(url, callback){
@@ -35,18 +33,21 @@ const getBeer = function(beers){
   selectedBeer.addEventListener('change', function(){
     let beer = beers[this.value];
     beerDetails(beer);
+    debugger;
   });
 }
 
 const beerDetails = function(beer){
   const mainDiv = document.getElementById('booze-list');
   mainDiv.removeChild(mainDiv.childNodes[0]);
-  const beerName = document.createElement('div');
-  beerName.innerText = beer.name;
+  const innerDiv = document.createElement('div');
   const beerImage = document.createElement('img');
   beerImage.src = beer.image_url;
-  beerName.appendChild(beerImage);
-  mainDiv.appendChild(beerName);
+  const beerName = document.createElement('div');
+  beerName.innerText = beer.name;
+  innerDiv.appendChild(beerImage);
+  innerDiv.appendChild(beerName);
+  mainDiv.appendChild(innerDiv);
   return mainDiv;
 }
 
