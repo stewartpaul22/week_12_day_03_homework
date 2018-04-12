@@ -33,8 +33,25 @@ const getBeer = function(beers){
   selectedBeer.addEventListener('change', function(){
     let beer = beers[this.value];
     beerDetails(beer);
-    debugger;
   });
+}
+
+const createIngredientsButton = function(func){
+  const ingredientsButton = document.createElement('input');
+  ingredientsButton.type = 'button';
+  ingredientsButton.value = 'View Ingredients';
+  ingredientsButton.onclick = func;
+  return ingredientsButton;
+}
+
+const getIngredients = function(beer){
+  const ingredientsDiv = document.createElement('div');
+  for (let ingredient of beer.ingredients.hops) {
+    const hopsP = document.createElement('p');
+    hopsP.innerText = ingredient.name;
+    ingredientsDiv.appendChild(hopsP);
+  }
+  return ingredientsDiv;
 }
 
 const beerDetails = function(beer){
@@ -45,8 +62,15 @@ const beerDetails = function(beer){
   beerImage.src = beer.image_url;
   const beerName = document.createElement('div');
   beerName.innerText = beer.name;
+
+  const ingredientsButton = createIngredientsButton(function(){
+    getIngredients(beer);
+  });
+  debugger;
+
   innerDiv.appendChild(beerImage);
   innerDiv.appendChild(beerName);
+  innerDiv.appendChild(ingredientsButton);
   mainDiv.appendChild(innerDiv);
   return mainDiv;
 }
