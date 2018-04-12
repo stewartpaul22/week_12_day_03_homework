@@ -64,9 +64,8 @@ const beerDetails = function(beer){
   beerName.innerText = beer.name;
 
   const ingredientsButton = createIngredientsButton(function(){
-    getIngredients(beer);
+    const ingredientsDiv = getIngredients(beer);
   });
-  debugger;
 
   innerDiv.appendChild(beerImage);
   innerDiv.appendChild(beerName);
